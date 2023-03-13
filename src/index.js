@@ -31,7 +31,7 @@ const lightbox = new SimpleLightbox('.gallery a', { captionDelay: 500,
               </p>
             </div>
           </div>` }).join("");
-       console.log(listMarkup);
+     
       gallery.insertAdjacentHTML(`beforeend`,listMarkup); 
       }
 
