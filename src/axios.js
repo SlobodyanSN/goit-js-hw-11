@@ -20,7 +20,7 @@ const response = await axios(`${BASE_URL}${KEY}`,{params:{
 }
 })
 if (response.status !== 200) {
-    Notiflix.Notify.failure(response.statusText)
+    Notiflix.Notify.failure(`${response.statusText}`)
     return
 }
 if (response.data.total === 0 ) {
