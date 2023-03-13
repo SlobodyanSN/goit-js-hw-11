@@ -18,7 +18,9 @@ const response = await axios(`${BASE_URL}${KEY}`,{params:{
         page: page
 }
 })
-return response.data
+// console.log(response.data);
+const hits = await response.data.hits
+return hits
 }
 catch(error) {
     console.log(error);
