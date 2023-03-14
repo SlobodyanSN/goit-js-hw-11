@@ -2,7 +2,7 @@
 import Notiflix from "notiflix";
 import { fethcImg } from "./axios";
 import SimpleLightbox from "simplelightbox";
-// import "simplelightbox/dist/simple-lightbox.min.css";
+import "simplelightbox/dist/simple-lightbox.min.css";
 
 const input = document.querySelector(`#search-form`);
 const gallery = document.querySelector(`.gallery`)
