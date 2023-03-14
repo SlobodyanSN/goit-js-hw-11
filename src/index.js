@@ -7,8 +7,8 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 const input = document.querySelector(`#search-form`);
 const gallery = document.querySelector(`.gallery`)
 
-// let lightbox = new SimpleLightbox('.gallery a', { captionDelay: 500,
-//   captionsData: 'alt'});
+const lightbox = new SimpleLightbox('.gallery a', { captionDelay: 500,
+  captionsData: 'alt'});
 
 function clearGalery() {
   gallery.innerHTML = ``;
