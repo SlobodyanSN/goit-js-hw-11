@@ -1,21 +1,25 @@
 
 import Notiflix from "notiflix";
 import { fethcImg } from "./axios";
-import simpleLightbox from "simplelightbox";
-import "simplelightbox/dist/simple-lightbox.min.css";
+import SimpleLightbox from "simplelightbox";
+// import "simplelightbox/dist/simple-lightbox.min.css";
 
 const input = document.querySelector(`#search-form`);
 const gallery = document.querySelector(`.gallery`)
 
-const lightbox = new SimpleLightbox('.gallery a', { captionDelay: 500,
-  captionsData: 'alt'});
+// let lightbox = new SimpleLightbox('.gallery a', { captionDelay: 500,
+//   captionsData: 'alt'});
+
+function clearGalery() {
+  gallery.innerHTML = ``;
+}
 
  function createMarkup(hits) {
        const listMarkup = 
        hits.map(({webformatURL, largeImageURL, tags, likes, views, comments, downloads
         }) => {
             return `<div class="photo-card">
-            <a href="${largeImageURL}"><img src="${webformatURL}" alt="${tags}" loading="lazy" width=260 height=200/></a>
+            <a href="${largeImageURL}"><img src="${webformatURL}" alt="${tags}" loading="lazy" width=300 height=200/></a>
             <div class="info">
             <p class="info-item">Likes: 
               <b>${likes}</b>
@@ -37,6 +41,7 @@ const lightbox = new SimpleLightbox('.gallery a', { captionDelay: 500,
 
 input.addEventListener(`submit`, onSubmit);
 function onSubmit(event) {
+  clearGalery()
 event.preventDefault();
 const serhcImg = event.target.elements.searchQuery.value.trim();
 if (serhcImg ==="") {

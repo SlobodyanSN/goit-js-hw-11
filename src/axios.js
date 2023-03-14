@@ -25,6 +25,7 @@ if (response.status !== 200) {
 }
 if (response.data.total === 0 ) {
     Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.")
+    return
 }
 
 Notiflix.Notify.success(`Hooray! We found ${response.data.totalHits} images.`)
