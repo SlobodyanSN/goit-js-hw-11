@@ -32,7 +32,6 @@ display: flex;
 flex-wrap: wrap;
 gap: 30px;
 
-
 }
 
 .photo-card {
@@ -63,4 +62,10 @@ button {
     border: none;
     outline: none;
     cursor: pointer;
+  }
+
+  .load-more {
+    
+    background-color: aqua;
+    margin: 20px;
   }
