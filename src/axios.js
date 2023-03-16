@@ -2,7 +2,7 @@ import axios from 'axios';
 import Notiflix from "notiflix";
 const BASE_URL = `https://pixabay.com/api/?key=`;
 const KEY = `34229211-437131f2e92cbbf7829eea8a9`
-const limit_per_page = 40;
+ export const limit_per_page = 40;
 
 
 
@@ -31,12 +31,13 @@ if (response.data.total === 0 ) {
 }
 
 Notiflix.Notify.success(`Hooray! We found ${response.data.totalHits} images.`)
-console.log(response);
 const data = await response.data
 return data
-}
+} 
+
 catch(error) {
     console.log(error);
 }
 
 }
+

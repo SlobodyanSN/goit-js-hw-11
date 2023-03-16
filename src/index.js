@@ -3,6 +3,7 @@ import Notiflix from "notiflix";
 import { fethcImg } from "./axios";
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
+import { limit_per_page } from "./axios";
 
 const input = document.querySelector(`#search-form`);
 const gallery = document.querySelector(`.gallery`);
@@ -57,16 +58,24 @@ if (serhcImg ==="") {
 }
 fethcImg(serhcImg, page)
 .then(data => {createMarkup(data)})
-.catch(error)
+.catch(error =>{console.log(error)})
 
 load_more.addEventListener(`click`, addPage);
 function addPage() {
 page +=1
 fethcImg(serhcImg, page)
+
 .then(data => {createMarkup(data)})
-.catch(error) 
+// .then(data =>{checkRest(data)})
+.catch(error =>{console.log(error)})
+
   
 }
 
 }
 
+function checkRest(data) {
+  if (data.totalHits / limit_per_page === page) {
+    load_more.hidden = true;
+  } return data
+}
