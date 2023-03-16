@@ -48,6 +48,7 @@ function clearGalery() {
 
 input.addEventListener(`submit`, onSubmit);
 function onSubmit(event) {
+  load_more.hidden = true;
   clearGalery()
 event.preventDefault();
 const serhcImg = event.target.elements.searchQuery.value.trim();
