@@ -19,6 +19,14 @@ function clearGalery() {
 }
 
  function createMarkup(data) {
+
+  if (data.totalHits < 2 ) {    
+        Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.")
+        input.reset()
+        return
+    }
+ 
+
        const listMarkup = 
        data.hits.map(({webformatURL, largeImageURL, tags, likes, views, comments, downloads
         }) => {
@@ -41,42 +49,50 @@ function clearGalery() {
           </div>` }).join("");
      
       gallery.insertAdjacentHTML(`beforeend`,listMarkup); 
-     
-      load_more.hidden = false;
-      return data
+      lightbox.refresh()
+      
+      if (data.totalHits - limit_per_page * page < 0) {
+        load_more.hidden = true;
+
+        Notiflix.Notify.info("We're sorry, but you've reached the end of search results.")
+        return
+       }
+    
+        Notiflix.Notify.success(`Hooray! We found else ${data.totalHits - limit_per_page * page} images.`)
+        load_more.hidden = false;
       }
 
 input.addEventListener(`submit`, onSubmit);
+
 function onSubmit(event) {
   load_more.hidden = true;
   clearGalery()
-event.preventDefault();
+  event.preventDefault();
+
 const serhcImg = event.target.elements.searchQuery.value.trim();
 if (serhcImg ==="") {
-  throw new Error(
-  Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again."))
-
+  Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.")
+  input.reset()
+return
 }
-fethcImg(serhcImg, page)
-.then(data => {createMarkup(data)})
-.catch(error =>{console.log(error)})
+
+ async function serchPictures ()  {
+  try {
+    const data = await fethcImg(serhcImg, page);
+    createMarkup(data);
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+serchPictures ()
+
 
 load_more.addEventListener(`click`, addPage);
 function addPage() {
 page +=1
-fethcImg(serhcImg, page)
-
-.then(data => {createMarkup(data)})
-// .then(data =>{checkRest(data)})
-.catch(error =>{console.log(error)})
-
-  
-}
+serchPictures ()
 
 }
-
-function checkRest(data) {
-  if (data.totalHits / limit_per_page === page) {
-    load_more.hidden = true;
-  } return data
 }
+
